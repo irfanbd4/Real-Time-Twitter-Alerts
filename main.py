@@ -71,8 +71,18 @@ def get_tweets(user_id):
         response = requests.get(url, params=params, cookies=cookies, headers=headers)
         response.raise_for_status()
         data = response.json()['data']['user']['result']['timeline_v2']['timeline']['instructions'][-1]['entries']
-        return {tweet['content']['itemContent']['tweet_results']['result']['legacy']['id_str']: tweet for tweet in data
-                if 'tweet_results' in tweet['content']['itemContent']}
+        data_dict = {}
+        for tweet in data:
+            try:
+                if 'tweet_results' in tweet['content']['itemContent']:
+                    tweet_id = tweet['content']['itemContent']['tweet_results']['result']['legacy']['id_str']
+                    data_dict[tweet_id] = tweet['content']['itemContent']['tweet_results']
+                else:
+                    tweet_id = tweet['content']['itemContent']['tweet']['result']['legacy']['id_str']
+                    data_dict[tweet_id] = tweet['content']['itemContent']['retweeted_status_result']
+            except KeyError:
+                pass
+        return data_dict
     except requests.RequestException as e:
         logging.error(f"Error fetching tweets: {e}")
         return {}
@@ -80,7 +90,7 @@ def get_tweets(user_id):
 
 def tweet_to_telegram(tweet_json, username):
     """Send a tweet to the Telegram channel."""
-    tweet_content = tweet_json.get('retweeted_status_result', {}).get('result', {}).get('legacy', tweet_json)
+    tweet_content = tweet_json.get('result', {}).get('legacy', tweet_json)
     caption = f"Tweet by {username}\n\n{html.unescape(tweet_content['full_text'])}"
     media = tweet_content.get('entities', {}).get('media', [{}])[0].get('media_url_https')
 
