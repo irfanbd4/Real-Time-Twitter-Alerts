@@ -115,6 +115,10 @@ If you encounter any issues or have questions, please open an issue on the [GitH
 
 ---
 
+<h2 align="center">Visitors Counts👀</h2>
+<a href="https://github.com/irfanbd4/Real-Time-Twitter-Alerts"><img alt="Cute Count" src="https://count.getloli.com/@Real-Time-Twitter-Alerts?name=Real-Time-Twitter-Alerts&theme=love-and-deepspace&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" /></a>
+
+
 ## 💖 Donate
 
 ### Bitcoin (BTC) / Bitcoin Cash(BCH)
