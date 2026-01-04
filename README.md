@@ -36,7 +36,7 @@
 
   1. **Clone the repository**:
      ```bash
-     git clone https://github.com/yourusername/twitter-to-telegram-notifier.git
+     git clone https://github.com/irfanbd4/twitter-to-telegram-notifier.git
      cd twitter-to-telegram-notifier
      ```
 
